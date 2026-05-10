@@ -43,8 +43,12 @@ def approve(action: str, payload: dict) -> bool:
     - Deployment → auto-approved
     """
 
-    # ✅ Auto-approve in deployment (Render sets RENDER=true automatically)
-    if os.getenv("AUTO_APPROVE", "false").lower() == "true" or os.getenv("RENDER"):
+    # ✅ Auto-approve in deployment (set AUTO_APPROVE=true in Render/Railway/etc.)
+    if (
+        os.getenv("AUTO_APPROVE", "false").lower() == "true"
+        or os.getenv("RENDER")
+        or os.getenv("RAILWAY_ENVIRONMENT")
+    ):
         logger.info(f"{action} auto-approved (deployment env)")
         return True
 
