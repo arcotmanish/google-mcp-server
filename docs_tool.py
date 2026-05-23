@@ -46,8 +46,14 @@ def append_to_doc(doc_id: str, content: str):
         logger.info("Google Docs service initialized")
 
         # -------- FORMAT CONTENT -------- #
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        formatted_content = f"\n[{timestamp}]\n{content}\n"
+        timestamp = datetime.now().strftime("%B %d, %Y at %I:%M %p")
+        formatted_content = (
+            f"\n\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"🤖 MCP Server Update  •  {timestamp}\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            f"{content}\n"
+        )
 
         # -------- PREPARE REQUEST -------- #
         requests = [
